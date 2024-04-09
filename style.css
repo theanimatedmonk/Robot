@@ -86,7 +86,7 @@ body { margin: 0px;
     padding: 12px 8px;
     font-size: 14px;
     border-radius: 8px;
-    border: 1px solid #414141
+    border: 1px solid #414141;
   }
  #e_pass:focus{
     border: 1px solid #414141;
