@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@rive-app/canvas@latest/rive.js"></script>
+    </head>
+
+
+
+<body>
+
+<div class="form-design">
+
+    <canvas id="robot" style="width: 40%; height: 40%;" width="40px" height="40px"></canvas> 
+    <form action="success.html" method="get" class="form">
+        
+        <div class="fields"> 
+            <span>Name</span>
+        <label for="e_name" >
+            <input type="text" name="e_name" id="e_name" placeholder="Enter name" required>
+        </label>
+        </div>
+
+        <div class="fields"> 
+            <span>Password</span>
+            <label for="e_pass" >
+                <input type="password" name="e_pass" id="e_pass" placeholder="Enter password" required>
+            </label>
+        </div>
+
+        <button id="formSubmit"  type="submit">Get started</button>
+
+    </form>
+
+    <script>
+        const passwordfield = document.getElementById('e_pass');
+        const namefield = document.getElementById('e_name');
+        const formSubmitButton = document.getElementById('formSubmit');
+
+      const r = new rive.Rive({
+      src: "robot_ai_4.riv",
+      
+      canvas: document.getElementById("robot"),
+      artboard: "Robot AI",
+      stateMachines: ["robot_ai"],
+      autoplay: true,
+       onLoad: () => {
+        const inputs = r.stateMachineInputs("robot_ai");
+
+        passwordfield.addEventListener("input" ,
+        () => {console.log('Password field typing');
+        inputs[1].value=true;
+        inputs[0].value=false;
+         } );
+
+         passwordfield.addEventListener("blur" ,
+        () => {console.log('Password field no typing');
+        inputs[1].value=false;
+         } );
+
+        namefield.addEventListener("input" ,
+        () => { if (namefield.value !== '')
+        { console.log('name field not blank');
+        inputs[0].value=true;
+        } } );
+
+         namefield.addEventListener("input" ,
+        () => { if (namefield.value == '')
+        { console.log('name field is blank');
+        inputs[0].value=false;
+         } } );
+
+         formSubmitButton.addEventListener("mouseover" ,
+        () => {console.log('Form submit button hovered');
+        inputs[2].value=true;
+         } );
+
+         formSubmitButton.addEventListener("mouseout" ,
+        () => {console.log('Form submit button hovered out');
+        inputs[2].value=false;
+         } );
+
+        r.resizeDrawingSurfaceToCanvas();
+     },
+    });
+     </script>
+
+
+
+
+</div>
+
+</body>
